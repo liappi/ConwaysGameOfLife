@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwaysGameOfLife", "ConwaysGameOfLife\ConwaysGameOfLife.csproj", "{88CDBE94-E5A4-426F-95F1-5C16D7F88D18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwaysGameOfLifeTests", "ConwaysGameOfLifeTests\ConwaysGameOfLifeTests.csproj", "{BC15CC3B-17E9-4203-B2A9-409977253131}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88CDBE94-E5A4-426F-95F1-5C16D7F88D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CDBE94-E5A4-426F-95F1-5C16D7F88D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CDBE94-E5A4-426F-95F1-5C16D7F88D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CDBE94-E5A4-426F-95F1-5C16D7F88D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC15CC3B-17E9-4203-B2A9-409977253131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC15CC3B-17E9-4203-B2A9-409977253131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC15CC3B-17E9-4203-B2A9-409977253131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC15CC3B-17E9-4203-B2A9-409977253131}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
