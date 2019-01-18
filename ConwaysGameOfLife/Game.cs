@@ -4,11 +4,11 @@ namespace ConwaysGameOfLife
 {
     public class Game
     {
-        public IEnumerable<char> board;
+        public IEnumerable<char> world;
 
-        public void SetInitialState(IEnumerable<char> initialState)
+        public void SetWorld(IEnumerable<char> world)
         {
-            board = initialState;
+            this.world = world;
         }
     }
 }

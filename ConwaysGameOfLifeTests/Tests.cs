@@ -8,38 +8,66 @@ namespace ConwaysGameOfLifeTests
     public class Tests
     {
         [Theory]
-        [InlineData("..." +
-                    "..." +
-                    "...",  "..." +
-                            "..." +
-                            "...")]
-        [InlineData(".X." +
-                    "..." +
-                    "...",  ".X." +
-                            "..." +
-                            "...")]
+        [InlineData("....." +
+                    "....." +
+                    "....." +
+                    "....." +
+                    ".....", "....." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
+        [InlineData("..X.." +
+                    "....." +
+                    "....." +
+                    "....." +
+                    ".....", "..X.." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
         
-        public void GivenInitialStateShouldSetBoardToInitialState(IEnumerable<char> expected, IEnumerable<char> initialState)
+        public void GivenWorldShouldSetGameWorld(IEnumerable<char> world, IEnumerable<char> expected)
         {
             var game = new Game();
-            game.SetInitialState(initialState);
-            Assert.Equal(expected, game.board);
+            game.SetWorld(world);
+            Assert.Equal(expected, game.world);
         }
 
         [Theory]
-        [InlineData("..." +
-                    ".XX" +
-                    "...",  "..." +
-                            "..." +
-                            "...")]
-        [InlineData("..." +
-                    ".X." +
-                    ".X.",  "..." +
-                            "..." +
-                            "...")]
-        public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> expected, IEnumerable<char> actual)
+        [InlineData("....." +
+                    "..X.." +
+                    "..X.." +
+                    "....." +
+                    ".....", "....." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
+        [InlineData("....." +
+                    "..XX." +
+                    "....." +
+                    "....." +
+                    ".....", "....." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
+        [InlineData("....." +
+                    "..X.." +
+                    ".X..." +
+                    "....." +
+                    ".....", "....." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
+        public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> worldBeforeTick, IEnumerable<char> worldAfterTick)
         {
-            
+            var game = new Game();
+            game.SetWorld(worldBeforeTick);
+            game.Tick();
+            Assert.Equal(worldAfterTick, game.world);
         }
     }
 }
