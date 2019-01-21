@@ -119,6 +119,36 @@ namespace ConwaysGameOfLifeTests
                         new Position(0, 1),
                         new Position(0, 2)
                     }
+                },
+                new object[]
+                {
+                    new Position(1, 0),
+                    new List<Position>
+                    {
+                        new Position(0, 0),
+                        new Position(2, 0),
+                        new Position(0, 1),
+                        new Position(1, 1),
+                        new Position(2, 1),
+                        new Position(0, 4),
+                        new Position(1, 4),
+                        new Position(2, 4)
+                    }
+                },
+                new object[]
+                {
+                    new Position(1, 4),
+                    new List<Position>
+                    {
+                        new Position(0, 4),
+                        new Position(2, 4),
+                        new Position(0, 3),
+                        new Position(1, 3),
+                        new Position(2, 3),
+                        new Position(0, 0),
+                        new Position(1, 0),
+                        new Position(2, 0)
+                    }
                 }
             };
 
