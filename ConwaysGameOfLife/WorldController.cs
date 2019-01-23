@@ -17,28 +17,31 @@ namespace ConwaysGameOfLife
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<char> GetNeighbouringCells(IEnumerable<char> world, Position cell)
+        public int GetCountOfLiveNeighbours(IEnumerable<char> neighbours)
         {
-            var positionsOfNeighbouringCells = GetPositionsOfNeighbouringCells(cell);
-            return positionsOfNeighbouringCells.Select(position => world.ElementAt(MapPositionToWorld(position))).ToList();
+            return neighbours.Count(neighbour => neighbour.Equals('X'));
         }
 
-        public IEnumerable<Position> GetPositionsOfNeighbouringCells(Position cell)
+        public IEnumerable<char> GetNeighbours(IEnumerable<char> world, Position cell)
         {
-            var positionsOfNeighbouringCells = new List<Position>();
+            var positionsOfNeighbours = GetPositionsOfNeighbours(cell);
+            return positionsOfNeighbours.Select(position => world.ElementAt(MapPositionToWorld(position))).ToList();
+        }
+
+        public IEnumerable<Position> GetPositionsOfNeighbours(Position cell)
+        {
+            var positionsOfNeighbours = new List<Position>();
             
             for (var x = cell.x - 1; x <= cell.x + 1; x++)
             {
                 for (var y = cell.y - 1; y <= cell.y + 1; y++)
                 {
                     if (!(x == cell.x && y == cell.y))
-                    {
-                        positionsOfNeighbouringCells.Add(new Position(MapOverlappingPositionComponent(x), MapOverlappingPositionComponent(y)));
-                    }
+                        positionsOfNeighbours.Add(new Position(MapOverlappingPositionComponent(x), MapOverlappingPositionComponent(y)));
                 }               
             }
             
-            return positionsOfNeighbouringCells;
+            return positionsOfNeighbours;
         }
 
         private int MapOverlappingPositionComponent(int positionComponent)

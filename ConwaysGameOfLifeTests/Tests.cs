@@ -170,7 +170,7 @@ namespace ConwaysGameOfLifeTests
         public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(Position cell, IEnumerable<Position> expected)
         {
             var worldController = new WorldController();
-            var actual = worldController.GetPositionsOfNeighbouringCells(cell);
+            var actual = worldController.GetPositionsOfNeighbours(cell);
             
             Assert.True(expected.SequenceEqual(actual));
         }
@@ -215,7 +215,19 @@ namespace ConwaysGameOfLifeTests
         public void GivenPositionOfCellShouldReturnNeighbouringCells(IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
         {
             var worldController = new WorldController();
-            var actual = worldController.GetNeighbouringCells(world, cell);
+            var actual = worldController.GetNeighbours(world, cell);
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("........", 0)]
+        [InlineData("XX......", 2)]
+        [InlineData("XXXX....", 4)]
+        public void GivenNeighboursShouldReturnNumberOfLiveNeighbours(IEnumerable<char> neighbours, int expected)
+        {
+            var worldController = new WorldController();
+            var actual = worldController.GetCountOfLiveNeighbours(neighbours);
             
             Assert.Equal(expected, actual);
         }
