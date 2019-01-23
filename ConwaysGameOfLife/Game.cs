@@ -14,7 +14,7 @@ namespace ConwaysGameOfLife
 
         public void Tick()
         {
-            IEnumerable<char> worldAfterTick = worldController.JudgeWorld(world);
+            var worldAfterTick = worldController.JudgeWorld(world);
             SetWorld(worldAfterTick);
         }
     }

@@ -14,7 +14,17 @@ namespace ConwaysGameOfLife
         
         public IEnumerable<char> JudgeWorld(IEnumerable<char> world)
         {
-            throw new System.NotImplementedException();
+            var newWorld = new List<char>();
+            for (var i = 0; i < world.Count(); i++)
+            {
+                var position = MapCellIndexInWorldToPosition(i);
+                var neighbours = GetNeighbours(world, position);
+                var countOfLiveNeighbours = GetCountOfLiveNeighbours(neighbours);
+                
+                newWorld.Add(countOfLiveNeighbours < 2 ? '.' : 'X');
+            }
+
+            return newWorld;
         }
 
         public int GetCountOfLiveNeighbours(IEnumerable<char> neighbours)
@@ -54,6 +64,13 @@ namespace ConwaysGameOfLife
         private int MapPositionToWorld(Position cell)
         {
             return cell.x + cell.y * dimension;
+        }
+
+        private Position MapCellIndexInWorldToPosition(int cellIndex)
+        {
+            var x = cellIndex % 5;
+            var y = cellIndex / 5;
+            return new Position(x, y);
         }
     }
 }

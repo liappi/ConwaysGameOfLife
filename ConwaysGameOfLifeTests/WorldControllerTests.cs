@@ -13,15 +13,6 @@ namespace ConwaysGameOfLifeTests
         [Theory]
         [InlineData("....." +
                     "..X.." +
-                    "..X.." +
-                    "....." +
-                    ".....", "....." +
-                             "....." +
-                             "....." +
-                             "....." +
-                             ".....")]
-        [InlineData("....." +
-                    "..XX." +
                     "....." +
                     "....." +
                     ".....", "....." +
@@ -30,7 +21,16 @@ namespace ConwaysGameOfLifeTests
                              "....." +
                              ".....")]
         [InlineData("....." +
-                    "..X.." +
+                    "...X." +
+                    "....." +
+                    "....." +
+                    ".....", "....." +
+                             "....." +
+                             "....." +
+                             "....." +
+                             ".....")]
+        [InlineData("....." +
+                    "....." +
                     ".X..." +
                     "....." +
                     ".....", "....." +
@@ -41,10 +41,8 @@ namespace ConwaysGameOfLifeTests
         public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> worldBeforeTick,
             IEnumerable<char> expected)
         {
-            var game = new Game();
-            game.SetWorld(worldBeforeTick);
-            game.Tick();
-            var actual = game.world;
+            var worldController = new WorldController();
+            var actual = new string(worldController.JudgeWorld(worldBeforeTick).ToArray());
             
             Assert.Equal(expected, actual);
         }
@@ -195,5 +193,6 @@ namespace ConwaysGameOfLifeTests
             
             Assert.Equal(expected, actual);
         }
+        
     }
 }
