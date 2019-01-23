@@ -50,7 +50,7 @@ namespace ConwaysGameOfLife
 
         private int MapPositionToWorld(Position cell)
         {
-            return cell.x - 1 + (cell.y - 1) * 5;
+            return cell.x + cell.y * 5;
         }
     }
 }

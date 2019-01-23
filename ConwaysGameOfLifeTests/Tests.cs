@@ -175,11 +175,49 @@ namespace ConwaysGameOfLifeTests
             Assert.True(expected.SequenceEqual(actual));
         }
 
-//        [Theory]
-//        [MemberData((nameof(WorldAndCellPositionAndNeighbouringCells)))]
-//        public void GivenPositionOfCellShouldReturnNeighbouringCells(IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
-//        {
-//            
-//        }
+        public static IEnumerable<object[]> WorldAndCellPositionAndNeighbouringCells =>
+            new List<object[]>
+            {
+                new object[]
+                {
+                    "....." +
+                    "....." +
+                    "....." +
+                    "....." +
+                    ".....",
+                    new Position(1, 1),
+                    "........"
+                },
+                new object[]
+                {
+                    ".X..." +
+                    "X...." +
+                    "X...." +
+                    "....." +
+                    ".....",
+                    new Position(1, 1),
+                    ".XXX...."
+                },
+                new object[]
+                {
+                    "X...." +
+                    "X...." +
+                    "....." +
+                    "....." +
+                    "X....",
+                    new Position(1, 0),
+                    "XXX....."
+                }
+            };
+        
+        [Theory]
+        [MemberData(nameof(WorldAndCellPositionAndNeighbouringCells))]
+        public void GivenPositionOfCellShouldReturnNeighbouringCells(IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
+        {
+            var worldController = new WorldController();
+            var actual = worldController.GetNeighbouringCells(world, cell);
+            
+            Assert.Equal(expected, actual);
+        }
     }
 }
