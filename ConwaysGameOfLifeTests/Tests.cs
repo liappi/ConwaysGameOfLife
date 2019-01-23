@@ -1,13 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ConwaysGameOfLife;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ConwaysGameOfLifeTests
 {
     public class Tests
     {
+        private readonly ITestOutputHelper output;
+
+        public Tests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+        
         [Theory]
         [InlineData("....." +
                     "....." +
@@ -32,7 +41,9 @@ namespace ConwaysGameOfLifeTests
         {
             var game = new Game();
             game.SetWorld(world);
-            Assert.Equal(expected, game.world);
+            var actual = game.world;
+            
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -64,12 +75,14 @@ namespace ConwaysGameOfLifeTests
                              "....." +
                              ".....")]
         public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> worldBeforeTick,
-            IEnumerable<char> worldAfterTick)
+            IEnumerable<char> expected)
         {
             var game = new Game();
             game.SetWorld(worldBeforeTick);
             game.Tick();
-            Assert.Equal(worldAfterTick, game.world);
+            var actual = game.world;
+            
+            Assert.Equal(expected, actual);
         }
 
         public static IEnumerable<object[]> PositionOfCellAndPositionsOfNeighbouringCells =>
@@ -81,12 +94,12 @@ namespace ConwaysGameOfLifeTests
                     new List<Position>
                     {
                         new Position(0, 0),
-                        new Position(1, 0),
-                        new Position(2, 0),
                         new Position(0, 1),
-                        new Position(2, 1),
                         new Position(0, 2),
+                        new Position(1, 0),
                         new Position(1, 2),
+                        new Position(2, 0),
+                        new Position(2, 1),
                         new Position(2, 2)
                     }
                 },
@@ -95,14 +108,14 @@ namespace ConwaysGameOfLifeTests
                     new Position(0, 1),
                     new List<Position>
                     {
-                        new Position(0, 0),
-                        new Position(1, 0),
-                        new Position(1, 1),
-                        new Position(0, 2),
-                        new Position(1, 2),
                         new Position(4, 0),
                         new Position(4, 1),
                         new Position(4, 2),
+                        new Position(0, 0),
+                        new Position(0, 2),
+                        new Position(1, 0),
+                        new Position(1, 1),
+                        new Position(1, 2),
                     }
                 },
                 new object[]
@@ -110,10 +123,10 @@ namespace ConwaysGameOfLifeTests
                     new Position(4, 1),
                     new List<Position>
                     {
-                        new Position(4, 0),
                         new Position(3, 0),
                         new Position(3, 1),
                         new Position(3, 2),
+                        new Position(4, 0),
                         new Position(4, 2),
                         new Position(0, 0),
                         new Position(0, 1),
@@ -125,14 +138,14 @@ namespace ConwaysGameOfLifeTests
                     new Position(1, 0),
                     new List<Position>
                     {
-                        new Position(0, 0),
-                        new Position(2, 0),
-                        new Position(0, 1),
-                        new Position(1, 1),
-                        new Position(2, 1),
                         new Position(0, 4),
+                        new Position(0, 0),
+                        new Position(0, 1),
                         new Position(1, 4),
-                        new Position(2, 4)
+                        new Position(1, 1),
+                        new Position(2, 4),
+                        new Position(2, 0),
+                        new Position(2, 1)
                     }
                 },
                 new object[]
@@ -140,13 +153,13 @@ namespace ConwaysGameOfLifeTests
                     new Position(1, 4),
                     new List<Position>
                     {
-                        new Position(0, 4),
-                        new Position(2, 4),
                         new Position(0, 3),
-                        new Position(1, 3),
-                        new Position(2, 3),
+                        new Position(0, 4),
                         new Position(0, 0),
+                        new Position(1, 3),
                         new Position(1, 0),
+                        new Position(2, 3),
+                        new Position(2, 4),
                         new Position(2, 0)
                     }
                 }
@@ -154,11 +167,19 @@ namespace ConwaysGameOfLifeTests
 
         [Theory]
         [MemberData(nameof(PositionOfCellAndPositionsOfNeighbouringCells))]
-        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(Position cell, IEnumerable<Position> neighbouringCells)
+        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(Position cell, IEnumerable<Position> expected)
         {
             var worldController = new WorldController();
             var actual = worldController.GetPositionsOfNeighbouringCells(cell);
-            Assert.Equal(neighbouringCells, actual);
+            
+            Assert.True(expected.SequenceEqual(actual));
         }
+
+//        [Theory]
+//        [MemberData((nameof(WorldAndCellPositionAndNeighbouringCells)))]
+//        public void GivenPositionOfCellShouldReturnNeighbouringCells(IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
+//        {
+//            
+//        }
     }
 }

@@ -1,16 +1,28 @@
+using System;
 using System.Runtime.CompilerServices;
 
 namespace ConwaysGameOfLife
 {
-    public class Position
+    public class Position : IEquatable<Position>
     {
-        private readonly int x;
-        private readonly int y;
+        public readonly int x;
+        public readonly int y;
 
         public Position(int x, int y) {
             this.x = x;
             this.y = y;
         }
+
+        public bool Equals(Position other)
+        {
+            if (other is null) 
+                return false;
+            
+            return x == other.x && y == other.y;
+        }
+        
+        public override bool Equals(object obj) => Equals(obj as Position);
+        public override int GetHashCode() => (x, y).GetHashCode();
     }
     
 }

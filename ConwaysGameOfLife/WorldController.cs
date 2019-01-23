@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConwaysGameOfLife
 {
@@ -11,12 +12,45 @@ namespace ConwaysGameOfLife
 
         public IEnumerable<char> GetNeighbouringCells(IEnumerable<char> world, Position cell)
         {
-            throw new System.NotImplementedException();
+            var neighbouringCells = new List<char>();
+            var positionsOfNeighbouringCells = GetPositionsOfNeighbouringCells(cell);
+
+            foreach (var position in positionsOfNeighbouringCells)
+            {
+                neighbouringCells.Add(world.ElementAt(MapPositionToWorld(position)));
+            }
+
+            return neighbouringCells;
         }
 
         public IEnumerable<Position> GetPositionsOfNeighbouringCells(Position cell)
         {
-            throw new System.NotImplementedException();
+            List<Position> positionsOfNeighbouringCells = new List<Position>();
+            
+            for (var x = cell.x - 1; x <= cell.x + 1; x++)
+            {
+                for (var y = cell.y - 1; y <= cell.y + 1; y++)
+                {
+                    if (!(x == cell.x && y == cell.y))
+                    {
+                        positionsOfNeighbouringCells.Add(new Position(MapOverlappingPositionComponent(x), MapOverlappingPositionComponent(y)));
+                    }
+                }               
+            }
+            
+            return positionsOfNeighbouringCells;
+        }
+
+        private int MapOverlappingPositionComponent(int positionComponent)
+        {
+            if (positionComponent < 0) return 5 + positionComponent;
+            if (positionComponent > 4) return 5 - positionComponent;
+            return positionComponent;
+        }
+
+        private int MapPositionToWorld(Position cell)
+        {
+            return cell.x - 1 + (cell.y - 1) * 5;
         }
     }
 }
