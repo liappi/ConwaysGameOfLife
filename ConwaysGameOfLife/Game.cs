@@ -11,7 +11,6 @@ namespace ConwaysGameOfLife
         {
             this.world = world;
             worldController = new WorldController(dimension);
-
         }
 
         public void UpdateWorld(IEnumerable<char> world)

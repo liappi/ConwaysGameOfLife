@@ -17,16 +17,42 @@ namespace ConwaysGameOfLife
         public IEnumerable<char> JudgeWorld(IEnumerable<char> world)
         {
             var newWorld = new List<char>();
+            
             for (var i = 0; i < world.Count(); i++)
             {
+                var currentCell = world.ElementAt(i);
                 var currentCellPosition = positionMapper.MapCellIndexInWorldToPosition(i);
                 var neighbours = neighbourFinder.GetNeighbours(world, currentCellPosition);
                 var countOfLiveNeighbours = GetCountOfLiveNeighbours(neighbours);
-                
-                newWorld.Add(countOfLiveNeighbours < 2 ? '.' : 'X');
+
+                if (isLiveCell(currentCell))
+                    newWorld.Add(GetUpdatedCellForLiveCell(countOfLiveNeighbours));
+                else
+                    newWorld.Add(GetUpdatedCellForDeadCell(countOfLiveNeighbours));
             }
 
             return newWorld;
+        }
+
+        private char GetUpdatedCellForLiveCell(int countOfLiveNeighbours)
+        {
+            if (countOfLiveNeighbours < 2 || countOfLiveNeighbours > 3)
+                return '.';
+            
+            return 'X';
+        }
+
+        private char GetUpdatedCellForDeadCell(int countOfLiveNeighbours)
+        {
+            if (countOfLiveNeighbours == 3)
+                return 'X';
+
+            return '.';
+        }
+
+        private bool isLiveCell(char cell)
+        {
+            return cell == 'X';
         }
 
         public int GetCountOfLiveNeighbours(IEnumerable<char> neighbours)

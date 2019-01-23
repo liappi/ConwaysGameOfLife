@@ -38,11 +38,32 @@ namespace ConwaysGameOfLifeTests
                              "....." +
                              "....." +
                              ".....", 5)]
-        public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> worldBeforeTick,
+        public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> initialWorld,
             IEnumerable<char> expected, int dimension)
         {
             var worldController = new WorldController(dimension);
-            var actual = new string(worldController.JudgeWorld(worldBeforeTick).ToArray());
+            var actual = new string(worldController.JudgeWorld(initialWorld).ToArray());
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("......" +
+                    "......" +
+                    "..XXX." +
+                    ".XXX.." +
+                    "......" +
+                    "......", "......" +
+                              "...X.." +
+                              ".X..X." +
+                              ".X..X." +
+                              "..X..." +
+                              "......", 6)]
+        public void GivenInitialWorldShouldReturnUpdatedWorld(IEnumerable<char> initialWorld, 
+            IEnumerable<char> expected, int dimension)
+        {
+            var worldController = new WorldController(dimension);
+            var actual = new string(worldController.JudgeWorld(initialWorld).ToArray());
             
             Assert.Equal(expected, actual);
         }
