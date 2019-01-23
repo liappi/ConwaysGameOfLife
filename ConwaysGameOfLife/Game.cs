@@ -7,6 +7,11 @@ namespace ConwaysGameOfLife
         public IEnumerable<char> world;
         public WorldController worldController;
 
+        public Game()
+        {
+            worldController = new WorldController();
+        }
+
         public void SetWorld(IEnumerable<char> world)
         {
             this.world = world;
