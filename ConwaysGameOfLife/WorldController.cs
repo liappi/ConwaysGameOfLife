@@ -6,10 +6,12 @@ namespace ConwaysGameOfLife
     public class WorldController
     {
         public NeighbourFinder neighbourFinder;
+        private PositionMapper positionMapper;
         
-        public WorldController()
+        public WorldController(int dimension)
         {
-            neighbourFinder = new NeighbourFinder();
+            neighbourFinder = new NeighbourFinder(dimension);
+            positionMapper = new PositionMapper(dimension);
         }
         
         public IEnumerable<char> JudgeWorld(IEnumerable<char> world)
@@ -17,7 +19,7 @@ namespace ConwaysGameOfLife
             var newWorld = new List<char>();
             for (var i = 0; i < world.Count(); i++)
             {
-                var currentCellPosition = PositionMapper.MapCellIndexInWorldToPosition(i);
+                var currentCellPosition = positionMapper.MapCellIndexInWorldToPosition(i);
                 var neighbours = neighbourFinder.GetNeighbours(world, currentCellPosition);
                 var countOfLiveNeighbours = GetCountOfLiveNeighbours(neighbours);
                 

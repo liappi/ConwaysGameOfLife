@@ -7,12 +7,14 @@ namespace ConwaysGameOfLife
         public IEnumerable<char> world;
         public WorldController worldController;
 
-        public Game()
+        public Game(IEnumerable<char> world, int dimension)
         {
-            worldController = new WorldController();
+            this.world = world;
+            worldController = new WorldController(dimension);
+
         }
 
-        public void SetWorld(IEnumerable<char> world)
+        public void UpdateWorld(IEnumerable<char> world)
         {
             this.world = world;
         }
@@ -20,7 +22,7 @@ namespace ConwaysGameOfLife
         public void Tick()
         {
             var worldAfterTick = worldController.JudgeWorld(world);
-            SetWorld(worldAfterTick);
+            UpdateWorld(worldAfterTick);
         }
     }
 }

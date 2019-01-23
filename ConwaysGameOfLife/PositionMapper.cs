@@ -2,9 +2,14 @@ namespace ConwaysGameOfLife
 {
     public class PositionMapper
     {
-        private static int dimension = 5;
+        private readonly int dimension;
 
-        public static int MapOverlappingPositionComponent(int positionComponent)
+        public PositionMapper(int dimension)
+        {
+            this.dimension = dimension;
+        }
+
+        public int MapOverlappingPositionComponent(int positionComponent)
         {
             if (positionComponent < 0) return dimension + positionComponent;
             if (positionComponent > dimension - 1) return dimension - positionComponent;
@@ -12,12 +17,12 @@ namespace ConwaysGameOfLife
         }
 
 
-        public static int MapPositionToWorld(Position cell)
+        public int MapPositionToWorld(Position cell)
         {
             return cell.x + cell.y * dimension;
         }
 
-        public static Position MapCellIndexInWorldToPosition(int cellIndex)
+        public Position MapCellIndexInWorldToPosition(int cellIndex)
         {
             var x = cellIndex % dimension;
             var y = cellIndex / dimension;

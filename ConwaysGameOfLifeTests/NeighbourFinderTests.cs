@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ConwaysGameOfLife;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Xunit;
 
 namespace ConwaysGameOfLifeTests
@@ -12,6 +13,7 @@ namespace ConwaysGameOfLifeTests
             {
                 new object[]
                 {
+                    5,
                     new Position(1, 1),
                     new List<Position>
                     {
@@ -27,6 +29,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     new Position(0, 1),
                     new List<Position>
                     {
@@ -42,6 +45,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     new Position(4, 1),
                     new List<Position>
                     {
@@ -57,6 +61,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     new Position(1, 0),
                     new List<Position>
                     {
@@ -72,6 +77,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     new Position(1, 4),
                     new List<Position>
                     {
@@ -89,9 +95,9 @@ namespace ConwaysGameOfLifeTests
 
         [Theory]
         [MemberData(nameof(PositionOfCellAndPositionsOfNeighbouringCells))]
-        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(Position cell, IEnumerable<Position> expected)
+        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(int dimension, Position cell, IEnumerable<Position> expected)
         {
-            var neighbourFinder = new NeighbourFinder();
+            var neighbourFinder = new NeighbourFinder(dimension);
             var actual = neighbourFinder.GetPositionsOfNeighbours(cell);
             
             Assert.True(expected.SequenceEqual(actual));
@@ -102,6 +108,7 @@ namespace ConwaysGameOfLifeTests
             {
                 new object[]
                 {
+                    5,
                     "....." +
                     "....." +
                     "....." +
@@ -112,6 +119,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     ".X..." +
                     "X...." +
                     "X...." +
@@ -122,6 +130,7 @@ namespace ConwaysGameOfLifeTests
                 },
                 new object[]
                 {
+                    5,
                     "X...." +
                     "X...." +
                     "....." +
@@ -134,9 +143,9 @@ namespace ConwaysGameOfLifeTests
         
         [Theory]
         [MemberData(nameof(WorldAndCellPositionAndNeighbouringCells))]
-        public void GivenPositionOfCellShouldReturnNeighbouringCells(IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
+        public void GivenPositionOfCellShouldReturnNeighbouringCells(int dimension, IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
         {
-            var neighbourFinder = new NeighbourFinder();
+            var neighbourFinder = new NeighbourFinder(dimension);
             var actual = neighbourFinder.GetNeighbours(world, cell);
             
             Assert.Equal(expected, actual);
