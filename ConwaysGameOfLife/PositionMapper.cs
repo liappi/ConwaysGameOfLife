@@ -9,7 +9,7 @@ namespace ConwaysGameOfLife
             this.dimension = dimension;
         }
 
-        public int MapOverlappingPositionComponent(int positionComponent)
+        public int MapPositionComponentForOverlap(int positionComponent)
         {
             if (positionComponent < 0) return dimension + positionComponent;
             if (positionComponent > dimension - 1) return dimension - positionComponent;
@@ -17,7 +17,7 @@ namespace ConwaysGameOfLife
         }
 
 
-        public int MapPositionToWorld(Position cell)
+        public int MapPositionToCellIndexInWorld(Position cell)
         {
             return cell.x + cell.y * dimension;
         }

@@ -15,7 +15,7 @@ namespace ConwaysGameOfLife
         public IEnumerable<char> GetNeighbours(IEnumerable<char> world, Position cell)
         {
             var positionsOfNeighbours = GetPositionsOfNeighbours(cell);
-            return positionsOfNeighbours.Select(position => world.ElementAt(positionMapper.MapPositionToWorld(position))).ToList();
+            return positionsOfNeighbours.Select(position => world.ElementAt(positionMapper.MapPositionToCellIndexInWorld(position))).ToList();
         }
         
         public IEnumerable<Position> GetPositionsOfNeighbours(Position cell)
@@ -28,8 +28,8 @@ namespace ConwaysGameOfLife
                 {
                     if (!(x == cell.x && y == cell.y))
                     {
-                        var remappedX = positionMapper.MapOverlappingPositionComponent(x);
-                        var remappedY = positionMapper.MapOverlappingPositionComponent(y);
+                        var remappedX = positionMapper.MapPositionComponentForOverlap(x);
+                        var remappedY = positionMapper.MapPositionComponentForOverlap(y);
                         positionsOfNeighbours.Add(new Position(remappedX, remappedY));
                     }
                 }               
