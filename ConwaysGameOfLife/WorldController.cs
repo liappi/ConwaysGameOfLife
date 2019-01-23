@@ -5,6 +5,13 @@ namespace ConwaysGameOfLife
 {
     public class WorldController
     {
+        private int dimension;
+
+        public WorldController()
+        {
+            dimension = 5;
+        }
+        
         public IEnumerable<char> JudgeWorld(IEnumerable<char> world)
         {
             throw new System.NotImplementedException();
@@ -12,20 +19,13 @@ namespace ConwaysGameOfLife
 
         public IEnumerable<char> GetNeighbouringCells(IEnumerable<char> world, Position cell)
         {
-            var neighbouringCells = new List<char>();
             var positionsOfNeighbouringCells = GetPositionsOfNeighbouringCells(cell);
-
-            foreach (var position in positionsOfNeighbouringCells)
-            {
-                neighbouringCells.Add(world.ElementAt(MapPositionToWorld(position)));
-            }
-
-            return neighbouringCells;
+            return positionsOfNeighbouringCells.Select(position => world.ElementAt(MapPositionToWorld(position))).ToList();
         }
 
         public IEnumerable<Position> GetPositionsOfNeighbouringCells(Position cell)
         {
-            List<Position> positionsOfNeighbouringCells = new List<Position>();
+            var positionsOfNeighbouringCells = new List<Position>();
             
             for (var x = cell.x - 1; x <= cell.x + 1; x++)
             {
@@ -43,14 +43,14 @@ namespace ConwaysGameOfLife
 
         private int MapOverlappingPositionComponent(int positionComponent)
         {
-            if (positionComponent < 0) return 5 + positionComponent;
-            if (positionComponent > 4) return 5 - positionComponent;
+            if (positionComponent < 0) return dimension + positionComponent;
+            if (positionComponent > dimension - 1) return dimension - positionComponent;
             return positionComponent;
         }
 
         private int MapPositionToWorld(Position cell)
         {
-            return cell.x + cell.y * 5;
+            return cell.x + cell.y * dimension;
         }
     }
 }
