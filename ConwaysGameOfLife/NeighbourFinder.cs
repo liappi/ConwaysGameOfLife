@@ -28,8 +28,8 @@ namespace ConwaysGameOfLife
                 {
                     if (!(x == cell.x && y == cell.y))
                     {
-                        var remappedX = positionMapper.MapPositionComponentForOverlap(x);
-                        var remappedY = positionMapper.MapPositionComponentForOverlap(y);
+                        var remappedX = positionMapper.MapPositionComponentForWrapAround(x);
+                        var remappedY = positionMapper.MapPositionComponentForWrapAround(y);
                         positionsOfNeighbours.Add(new Position(remappedX, remappedY));
                     }
                 }               
