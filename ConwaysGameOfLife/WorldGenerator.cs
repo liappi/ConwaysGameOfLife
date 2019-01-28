@@ -7,6 +7,8 @@ namespace ConwaysGameOfLife
     {
         public NeighbourFinder neighbourFinder;
         private PositionMapper positionMapper;
+        const char liveCell = 'X';
+        const char deadCell = '.';
         
         
         public WorldGenerator(int dimension)
@@ -38,27 +40,27 @@ namespace ConwaysGameOfLife
         private char GetUpdatedCellForLiveCell(int countOfLiveNeighbours)
         {
             if (countOfLiveNeighbours < 2 || countOfLiveNeighbours > 3)
-                return '.';
+                return deadCell;
             
-            return 'X';
+            return liveCell;
         }
 
         private char GetUpdatedCellForDeadCell(int countOfLiveNeighbours)
         {
             if (countOfLiveNeighbours == 3)
-                return 'X';
+                return liveCell;
 
-            return '.';
+            return deadCell;
         }
 
         private bool isLiveCell(char cell)
         {
-            return cell == 'X';
+            return cell == liveCell;
         }
 
         public int GetCountOfLiveNeighbours(IEnumerable<char> neighbours)
         {
-            return neighbours.Count(neighbour => neighbour.Equals('X'));
+            return neighbours.Count(neighbour => neighbour.Equals(liveCell));
         }
     }
 }
