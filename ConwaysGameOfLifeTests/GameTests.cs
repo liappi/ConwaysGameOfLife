@@ -37,7 +37,7 @@ namespace ConwaysGameOfLifeTests
         public void GivenWorldShouldSetGameWorld(IEnumerable<char> world, IEnumerable<char> expected, int dimension)
         {
             var game = new Game(world, dimension);
-            var actual = game.world;
+            var actual = game._world;
             
             Assert.Equal(expected, actual);
         }

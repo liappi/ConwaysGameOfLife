@@ -3,18 +3,19 @@ using System.Linq;
 
 namespace ConwaysGameOfLife
 {
-    public class WorldController
+    public class WorldGenerator
     {
         public NeighbourFinder neighbourFinder;
         private PositionMapper positionMapper;
         
-        public WorldController(int dimension)
+        
+        public WorldGenerator(int dimension)
         {
             neighbourFinder = new NeighbourFinder(dimension);
             positionMapper = new PositionMapper(dimension);
         }
         
-        public IEnumerable<char> JudgeWorld(IEnumerable<char> world)
+        public IEnumerable<char> GenerateNewWorld(IEnumerable<char> world)
         {
             var newWorld = new List<char>();
             

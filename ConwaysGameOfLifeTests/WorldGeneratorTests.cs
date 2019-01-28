@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace ConwaysGameOfLifeTests
 {
-    public class WorldControllerTests
+    public class WorldGeneratorTests
     {
         [Theory]
         [InlineData("....." +
@@ -41,8 +41,8 @@ namespace ConwaysGameOfLifeTests
         public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> initialWorld,
             IEnumerable<char> expected, int dimension)
         {
-            var worldController = new WorldController(dimension);
-            var actual = new string(worldController.JudgeWorld(initialWorld).ToArray());
+            var worldGenerator = new WorldGenerator(dimension);
+            var actual = new string(worldGenerator.GenerateNewWorld(initialWorld).ToArray());
             
             Assert.Equal(expected, actual);
         }
@@ -62,8 +62,8 @@ namespace ConwaysGameOfLifeTests
         public void GivenInitialWorldShouldReturnUpdatedWorld(IEnumerable<char> initialWorld, 
             IEnumerable<char> expected, int dimension)
         {
-            var worldController = new WorldController(dimension);
-            var actual = new string(worldController.JudgeWorld(initialWorld).ToArray());
+            var worldGenerator = new WorldGenerator(dimension);
+            var actual = new string(worldGenerator.GenerateNewWorld(initialWorld).ToArray());
             
             Assert.Equal(expected, actual);
         }
@@ -74,8 +74,8 @@ namespace ConwaysGameOfLifeTests
         [InlineData("XXXX....", 4, 5)]
         public void GivenNeighboursShouldReturnNumberOfLiveNeighbours(IEnumerable<char> neighbours, int expected, int dimension)
         {
-            var worldController = new WorldController(dimension);
-            var actual = worldController.GetCountOfLiveNeighbours(neighbours);
+            var worldGenerator = new WorldGenerator(dimension);
+            var actual = worldGenerator.GetCountOfLiveNeighbours(neighbours);
             
             Assert.Equal(expected, actual);
         }
