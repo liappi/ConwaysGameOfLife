@@ -18,10 +18,9 @@ namespace ConwaysGameOfLife
             UpdateWorld(seed);
             _worldDimension = (int) Math.Sqrt(seed.Count());
             
-            var positionMapper = new PositionMapper(_worldDimension);
             var neighbourFinder = new NeighbourFinder(_worldDimension);
             
-            _worldGenerator = new WorldGenerator(neighbourFinder, positionMapper);
+            _worldGenerator = new WorldGenerator(neighbourFinder);
         }
 
         public void Play()
