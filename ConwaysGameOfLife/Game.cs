@@ -34,20 +34,20 @@ namespace ConwaysGameOfLife
             while (true)
             {
                 Tick();
-                Thread.Sleep(1000);
                 PrintWorld(World, _worldDimension);
+                Thread.Sleep(1000);
             }
+        }
+        
+        private void Tick()
+        {
+            var newWorld = _worldGenerator.GenerateNewWorld(World);
+            UpdateWorld(newWorld);
         }
         
         public void UpdateWorld(IEnumerable<char> newWorld)
         {
             World = newWorld;
-        }
-
-        public void Tick()
-        {
-            var newWorld = _worldGenerator.GenerateNewWorld(World);
-            UpdateWorld(newWorld);
         }
 
         private string GetValidUserInput()
