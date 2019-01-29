@@ -6,8 +6,6 @@ namespace ConwaysGameOfLife
     public class NeighbourFinder
     {
         private readonly PositionMapper _positionMapper;
-        const char liveCell = 'X';
-        const char deadCell = '.';
 
         public NeighbourFinder(int dimension)
         {
@@ -19,7 +17,7 @@ namespace ConwaysGameOfLife
             var cellPosition = _positionMapper.MapCellIndexInWorldToPosition(cellIndex);
             
             var neighbours = GetNeighbours(world, cellPosition);
-            return neighbours.Count(neighbour => neighbour.Equals(liveCell));
+            return neighbours.Count(neighbour => neighbour.Equals(CellState.LiveCell));
         }
         
         public IEnumerable<char> GetNeighbours(IEnumerable<char> world, Position cell)

@@ -5,26 +5,26 @@ using System.Text;
 
 namespace ConwaysGameOfLife
 {
-    public static class Renderer
+    public class Renderer
     {
-        public static void PrintWelcomeMessage()
+        public void PrintWelcomeMessage()
         {
             Console.WriteLine("Welcome to Conway's Game of Life!");
         }
 
-        public static string GetUserInput()
+        public string GetUserInput()
         {
             Console.WriteLine("Please choose a seed from the following:");
             Console.WriteLine("BLINKER");
             return Console.ReadLine();
         }
 
-        public static void PrintInvalidInputMessage()
+        public void PrintInvalidInputMessage()
         {
             Console.WriteLine("Your input was invalid");
         }
 
-        public static void PrintWorld(IEnumerable<char> world, int dimension)
+        public void PrintWorld(IEnumerable<char> world, int dimension)
         {
             var formattedWorld = new StringBuilder("");
             
