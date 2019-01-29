@@ -5,31 +5,31 @@ namespace ConwaysGameOfLife
 {
     public class NeighbourFinder
     {
-        private PositionMapper positionMapper;
+        private PositionMapper _positionMapper;
 
         public NeighbourFinder(int dimension)
         {
-            positionMapper = new PositionMapper(dimension);
+            _positionMapper = new PositionMapper(dimension);
         }
         
         public IEnumerable<char> GetNeighbours(IEnumerable<char> world, Position cell)
         {
             var positionsOfNeighbours = GetPositionsOfNeighbours(cell);
-            return positionsOfNeighbours.Select(position => world.ElementAt(positionMapper.MapPositionToCellIndexInWorld(position))).ToList();
+            return positionsOfNeighbours.Select(position => world.ElementAt(_positionMapper.MapPositionToCellIndexInWorld(position))).ToList();
         }
         
         public IEnumerable<Position> GetPositionsOfNeighbours(Position cell)
         {
             var positionsOfNeighbours = new List<Position>();
             
-            for (var x = cell.x - 1; x <= cell.x + 1; x++)
+            for (var x = cell.X - 1; x <= cell.X + 1; x++)
             {
-                for (var y = cell.y - 1; y <= cell.y + 1; y++)
+                for (var y = cell.Y - 1; y <= cell.Y + 1; y++)
                 {
-                    if (!(x == cell.x && y == cell.y))
+                    if (!(x == cell.X && y == cell.Y))
                     {
-                        var remappedX = positionMapper.MapPositionComponentForWrapAround(x);
-                        var remappedY = positionMapper.MapPositionComponentForWrapAround(y);
+                        var remappedX = _positionMapper.MapPositionComponentForWrapAround(x);
+                        var remappedY = _positionMapper.MapPositionComponentForWrapAround(y);
                         positionsOfNeighbours.Add(new Position(remappedX, remappedY));
                     }
                 }               

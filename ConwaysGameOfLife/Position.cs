@@ -5,12 +5,12 @@ namespace ConwaysGameOfLife
 {
     public class Position : IEquatable<Position>
     {
-        public readonly int x;
-        public readonly int y;
+        public int X { get; }
+        public int Y { get; }
 
         public Position(int x, int y) {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
 
         public bool Equals(Position other)
@@ -18,11 +18,11 @@ namespace ConwaysGameOfLife
             if (other is null) 
                 return false;
             
-            return x == other.x && y == other.y;
+            return X == other.X && Y == other.Y;
         }
         
         public override bool Equals(object obj) => Equals(obj as Position);
-        public override int GetHashCode() => (x, y).GetHashCode();
+        public override int GetHashCode() => (X, Y).GetHashCode();
     }
     
 }

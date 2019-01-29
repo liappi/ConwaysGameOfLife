@@ -4,23 +4,23 @@ namespace ConwaysGameOfLife
 {
     public class Game
     {
-        public IEnumerable<char> _world;
-        public WorldGenerator _worldGenerator;
+        public IEnumerable<char> World;
+        private WorldGenerator _worldGenerator;
 
         public Game(IEnumerable<char> world, int dimension)
         {
-            _world = world;
+            World = world;
             _worldGenerator = new WorldGenerator(dimension);
         }
 
         public void UpdateWorld(IEnumerable<char> newWorld)
         {
-            _world = newWorld;
+            World = newWorld;
         }
 
         public void Tick()
         {
-            var newWorld = _worldGenerator.GenerateNewWorld(_world);
+            var newWorld = _worldGenerator.GenerateNewWorld(World);
             UpdateWorld(newWorld);
         }
     }

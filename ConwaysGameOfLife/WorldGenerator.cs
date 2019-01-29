@@ -5,16 +5,16 @@ namespace ConwaysGameOfLife
 {
     public class WorldGenerator
     {
-        public NeighbourFinder neighbourFinder;
-        private PositionMapper positionMapper;
+        private NeighbourFinder _neighbourFinder;
+        private PositionMapper _positionMapper;
         const char liveCell = 'X';
         const char deadCell = '.';
         
         
         public WorldGenerator(int dimension)
         {
-            neighbourFinder = new NeighbourFinder(dimension);
-            positionMapper = new PositionMapper(dimension);
+            _neighbourFinder = new NeighbourFinder(dimension);
+            _positionMapper = new PositionMapper(dimension);
         }
         
         public IEnumerable<char> GenerateNewWorld(IEnumerable<char> world)
@@ -24,8 +24,8 @@ namespace ConwaysGameOfLife
             for (var i = 0; i < world.Count(); i++)
             {
                 var currentCell = world.ElementAt(i);
-                var currentCellPosition = positionMapper.MapCellIndexInWorldToPosition(i);
-                var neighbours = neighbourFinder.GetNeighbours(world, currentCellPosition);
+                var currentCellPosition = _positionMapper.MapCellIndexInWorldToPosition(i);
+                var neighbours = _neighbourFinder.GetNeighbours(world, currentCellPosition);
                 var countOfLiveNeighbours = GetCountOfLiveNeighbours(neighbours);
 
                 if (isLiveCell(currentCell))
