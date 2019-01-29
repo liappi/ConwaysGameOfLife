@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using static ConwaysGameOfLife.CellUpdater;
 
 namespace ConwaysGameOfLife
 {
     public class WorldGenerator
     {
         private readonly NeighbourFinder _neighbourFinder;
+        private readonly CellUpdater _cellUpdater;
         
-        public WorldGenerator(NeighbourFinder neighbourFinder)
+        public WorldGenerator(NeighbourFinder neighbourFinder, CellUpdater cellUpdater)
         {
             _neighbourFinder = neighbourFinder;
+            _cellUpdater = cellUpdater;
         }
         
         public IEnumerable<char> GenerateNewWorld(IEnumerable<char> world)
@@ -22,7 +23,7 @@ namespace ConwaysGameOfLife
                 var currentCell = world.ElementAt(i);
                 var countOfLiveNeighbours = _neighbourFinder.GetCountOfLiveNeighbours(world, i);
 
-                newWorld.Add(GetUpdatedCell(currentCell, countOfLiveNeighbours));
+                newWorld.Add(_cellUpdater.GetUpdatedCell(currentCell, countOfLiveNeighbours));
             }
 
             return newWorld;

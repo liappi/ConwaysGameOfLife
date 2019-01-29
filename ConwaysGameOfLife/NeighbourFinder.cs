@@ -16,17 +16,13 @@ namespace ConwaysGameOfLife
         {
             var cellPosition = _positionMapper.MapCellIndexInWorldToPosition(cellIndex);
             
-            var neighbours = GetNeighbours(world, cellPosition);
+            var positionsOfNeighbours = GetPositionsOfNeighbours(cellPosition);
+            var neighbours = positionsOfNeighbours.Select(position => world.ElementAt(_positionMapper.MapPositionToCellIndexInWorld(position))).ToList(); 
+            
             return neighbours.Count(neighbour => neighbour.Equals(CellState.LiveCell));
         }
         
-        public IEnumerable<char> GetNeighbours(IEnumerable<char> world, Position cell)
-        {
-            var positionsOfNeighbours = GetPositionsOfNeighbours(cell);
-            return positionsOfNeighbours.Select(position => world.ElementAt(_positionMapper.MapPositionToCellIndexInWorld(position))).ToList();
-        }
-        
-        public IEnumerable<Position> GetPositionsOfNeighbours(Position cell)
+        private IEnumerable<Position> GetPositionsOfNeighbours(Position cell)
         {
             var positionsOfNeighbours = new List<Position>();
             

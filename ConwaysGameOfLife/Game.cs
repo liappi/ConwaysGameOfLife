@@ -10,8 +10,8 @@ namespace ConwaysGameOfLife
     {
         private readonly Renderer _renderer;
         private readonly InputValidator _inputValidator;
-        
-        public IEnumerable<char> World;
+
+        private IEnumerable<char> World;
         private WorldGenerator _worldGenerator;
         private int _worldDimension;
 
@@ -27,8 +27,9 @@ namespace ConwaysGameOfLife
             _worldDimension = (int) Math.Sqrt(seed.Count());
             
             var neighbourFinder = new NeighbourFinder(_worldDimension);
+            var cellUpdater = new CellUpdater();
             
-            _worldGenerator = new WorldGenerator(neighbourFinder);
+            _worldGenerator = new WorldGenerator(neighbourFinder, cellUpdater);
         }
 
         public void Play()

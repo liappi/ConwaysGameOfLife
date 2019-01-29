@@ -1,8 +1,8 @@
 namespace ConwaysGameOfLife
 {
-    public static class CellUpdater
+    public class CellUpdater
     {
-        public static char GetUpdatedCell(char cell, int countOfLiveNeighbours)
+        public char GetUpdatedCell(char cell, int countOfLiveNeighbours)
         {
             if (isLiveCell(cell))
                 return GetUpdatedCellForLiveCell(countOfLiveNeighbours);
@@ -11,7 +11,7 @@ namespace ConwaysGameOfLife
             
         }
 
-        private static char GetUpdatedCellForLiveCell(int countOfLiveNeighbours)
+        private char GetUpdatedCellForLiveCell(int countOfLiveNeighbours)
         {
             if (countOfLiveNeighbours < 2 || countOfLiveNeighbours > 3)
                 return CellState.DeadCell;
@@ -19,7 +19,7 @@ namespace ConwaysGameOfLife
             return CellState.LiveCell;
         }
 
-        private static char GetUpdatedCellForDeadCell(int countOfLiveNeighbours)
+        private char GetUpdatedCellForDeadCell(int countOfLiveNeighbours)
         {
             if (countOfLiveNeighbours == 3)
                 return CellState.LiveCell;
@@ -27,7 +27,7 @@ namespace ConwaysGameOfLife
             return CellState.DeadCell;
         }
 
-        private static bool isLiveCell(char cell)
+        private bool isLiveCell(char cell)
         {
             return cell == CellState.LiveCell;
         }

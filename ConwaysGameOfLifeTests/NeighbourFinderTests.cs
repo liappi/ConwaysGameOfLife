@@ -93,15 +93,15 @@ namespace ConwaysGameOfLifeTests
                 }
             };
 
-        [Theory]
-        [MemberData(nameof(PositionOfCellAndPositionsOfNeighbouringCells))]
-        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(int dimension, Position cell, IEnumerable<Position> expected)
-        {
-            var neighbourFinder = new NeighbourFinder(dimension);
-            var actual = neighbourFinder.GetPositionsOfNeighbours(cell);
-            
-            Assert.True(expected.SequenceEqual(actual));
-        }
+//        [Theory]
+//        [MemberData(nameof(PositionOfCellAndPositionsOfNeighbouringCells))]
+//        public void GivenPositionOfCellShouldReturnPositionsOfNeighbouringCells(int dimension, Position cell, IEnumerable<Position> expected)
+//        {
+//            var neighbourFinder = new NeighbourFinder(dimension);
+//            var actual = neighbourFinder.GetPositionsOfNeighbours(cell);
+//            
+//            Assert.True(expected.SequenceEqual(actual));
+//        }
 
         public static IEnumerable<object[]> WorldAndCellPositionAndNeighbouringCells =>
             new List<object[]>
@@ -141,14 +141,14 @@ namespace ConwaysGameOfLifeTests
                 }
             };
         
-        [Theory]
-        [MemberData(nameof(WorldAndCellPositionAndNeighbouringCells))]
-        public void GivenPositionOfCellShouldReturnNeighbouringCells(int dimension, IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
-        {
-            var neighbourFinder = new NeighbourFinder(dimension);
-            var actual = neighbourFinder.GetNeighbours(world, cell);
-            
-            Assert.Equal(expected, actual);
-        }
+//        [Theory]
+//        [MemberData(nameof(WorldAndCellPositionAndNeighbouringCells))]
+//        public void GivenPositionOfCellShouldReturnNeighbouringCells(int dimension, IEnumerable<char> world, Position cell, IEnumerable<char> expected) 
+//        {
+//            var neighbourFinder = new NeighbourFinder(dimension);
+//            var actual = neighbourFinder.GetNeighbours(world, cell);
+//            
+//            Assert.Equal(expected, actual);
+//        }
     }
 }
