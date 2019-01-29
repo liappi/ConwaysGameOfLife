@@ -16,6 +16,8 @@ namespace ConwaysGameOfLife
         {
             Console.WriteLine("Please choose a seed from the following:");
             Console.WriteLine("BLINKER");
+            Console.WriteLine("PULSAR");
+            Console.WriteLine("GLIDER");
             return Console.ReadLine();
         }
 

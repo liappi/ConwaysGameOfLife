@@ -41,8 +41,8 @@ namespace ConwaysGameOfLife
 
             while (true)
             {
-                World = _worldGenerator.GenerateNewWorld(World);
                 _renderer.PrintWorld(World, _worldDimension);
+                World = _worldGenerator.GenerateNewWorld(World);
                 Thread.Sleep(1000);
             }
         }
