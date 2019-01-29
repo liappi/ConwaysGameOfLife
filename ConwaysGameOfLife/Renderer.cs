@@ -24,13 +24,13 @@ namespace ConwaysGameOfLife
             Console.WriteLine("Your input was invalid");
         }
 
-        public static void PrintWorld(IEnumerable<char> world)
+        public static void PrintWorld(IEnumerable<char> world, int dimension)
         {
             var formattedWorld = new StringBuilder("");
             
             for (var i = 0; i < world.Count(); i++)
             {
-                if (i % 10 == 0) 
+                if (i % dimension == 0) 
                     formattedWorld.Append("\n");
                 
                 formattedWorld.Append(world.ElementAt(i) + " ");

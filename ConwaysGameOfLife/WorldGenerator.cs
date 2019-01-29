@@ -10,7 +10,6 @@ namespace ConwaysGameOfLife
         const char liveCell = 'X';
         const char deadCell = '.';
         
-        
         public WorldGenerator(NeighbourFinder neighbourFinder, PositionMapper positionMapper)
         {
             _neighbourFinder = neighbourFinder;

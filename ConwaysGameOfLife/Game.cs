@@ -11,27 +11,17 @@ namespace ConwaysGameOfLife
     {
         public IEnumerable<char> World;
         private WorldGenerator _worldGenerator;
+        private int _worldDimension;
 
-        public void InitialiseGame(IEnumerable<char> seed)
+        private void InitialiseGame(IEnumerable<char> seed)
         {
             UpdateWorld(seed);
-
-            var dimension = (int) Math.Sqrt(seed.Count());
-            var positionMapper = new PositionMapper(dimension);
-            var neighbourFinder = new NeighbourFinder(dimension);
+            _worldDimension = (int) Math.Sqrt(seed.Count());
+            
+            var positionMapper = new PositionMapper(_worldDimension);
+            var neighbourFinder = new NeighbourFinder(_worldDimension);
             
             _worldGenerator = new WorldGenerator(neighbourFinder, positionMapper);
-        }
-
-        public void UpdateWorld(IEnumerable<char> newWorld)
-        {
-            World = newWorld;
-        }
-
-        public void Tick()
-        {
-            var newWorld = _worldGenerator.GenerateNewWorld(World);
-            UpdateWorld(newWorld);
         }
 
         public void Play()
@@ -45,8 +35,19 @@ namespace ConwaysGameOfLife
             {
                 Tick();
                 Thread.Sleep(1000);
-                PrintWorld(World);
+                PrintWorld(World, _worldDimension);
             }
+        }
+        
+        public void UpdateWorld(IEnumerable<char> newWorld)
+        {
+            World = newWorld;
+        }
+
+        public void Tick()
+        {
+            var newWorld = _worldGenerator.GenerateNewWorld(World);
+            UpdateWorld(newWorld);
         }
 
         private string GetValidUserInput()

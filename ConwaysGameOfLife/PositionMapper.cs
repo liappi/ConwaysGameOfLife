@@ -16,7 +16,6 @@ namespace ConwaysGameOfLife
             return positionComponent;
         }
 
-
         public int MapPositionToCellIndexInWorld(Position cell)
         {
             return cell.X + cell.Y * _dimension;
