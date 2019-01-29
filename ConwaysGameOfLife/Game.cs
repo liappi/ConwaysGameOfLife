@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using static ConwaysGameOfLife.Seed;
 
 namespace ConwaysGameOfLife
@@ -9,9 +10,8 @@ namespace ConwaysGameOfLife
         private WorldGenerator _worldGenerator;
         private Renderer _renderer;
 
-        public Game(IEnumerable<char> world, int dimension)
+        public Game(int dimension)
         {
-            World = world;
             _worldGenerator = new WorldGenerator(dimension);
             _renderer = new Renderer();
         }
@@ -30,7 +30,16 @@ namespace ConwaysGameOfLife
         public void Play()
         {
             _renderer.PrintWelcomeMessage();
-            
+            var input = GetValidUserInput();
+            var seed = Seeds[input];
+            UpdateWorld(seed);
+
+            while (true)
+            {
+                Tick();
+                Thread.Sleep(1000);
+                _renderer.PrintWorld(World);
+            }
         }
 
         public string GetValidUserInput()
@@ -39,9 +48,10 @@ namespace ConwaysGameOfLife
             
             while (!Seeds.ContainsKey(input))
             {
+                _renderer.PrintInvalidInputMessage();
                 input = _renderer.GetUserInput();
             }
-
+            
             return input;
         }
     }

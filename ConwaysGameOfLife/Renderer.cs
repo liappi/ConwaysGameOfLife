@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ConwaysGameOfLife
 {
@@ -21,5 +23,18 @@ namespace ConwaysGameOfLife
         {
             Console.WriteLine("Your input was invalid");
         }
+
+        public void PrintWorld(IEnumerable<char> world)
+        {
+            var printedWorld = new StringBuilder("");
+            for (var i = 0; i < world.Count(); i++)
+            {
+                if (i % 10 == 0) printedWorld.Append("\n");
+                printedWorld.Append(world.ElementAt(i) + " ");
+            }
+
+            Console.WriteLine(printedWorld);
+        }
     }
+    
 }

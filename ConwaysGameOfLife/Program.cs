@@ -6,7 +6,8 @@ namespace ConwaysGameOfLife
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var game = new Game(10);
+            game.Play();
         }
     }
 }
