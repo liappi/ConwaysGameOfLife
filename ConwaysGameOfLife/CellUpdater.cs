@@ -8,7 +8,6 @@ namespace ConwaysGameOfLife
                 return GetUpdatedCellForLiveCell(countOfLiveNeighbours);
             
             return GetUpdatedCellForDeadCell(countOfLiveNeighbours);
-            
         }
 
         private char GetUpdatedCellForLiveCell(int countOfLiveNeighbours)
@@ -31,6 +30,5 @@ namespace ConwaysGameOfLife
         {
             return cell == CellState.LiveCell;
         }
-        
     }
 }
