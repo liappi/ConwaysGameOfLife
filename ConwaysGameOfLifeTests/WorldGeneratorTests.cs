@@ -41,7 +41,7 @@ namespace ConwaysGameOfLifeTests
         public void GivenLiveCellWithLessThanTwoLiveNeighboursShouldBecomeDeadCell(IEnumerable<char> initialWorld,
             IEnumerable<char> expected, int dimension)
         {
-            var worldGenerator = new WorldGenerator(dimension);
+            var worldGenerator = new WorldGenerator(new NeighbourFinder(dimension), new PositionMapper(dimension));
             var actual = new string(worldGenerator.GenerateNewWorld(initialWorld).ToArray());
             
             Assert.Equal(expected, actual);
@@ -62,7 +62,7 @@ namespace ConwaysGameOfLifeTests
         public void GivenInitialWorldShouldReturnUpdatedWorld(IEnumerable<char> initialWorld, 
             IEnumerable<char> expected, int dimension)
         {
-            var worldGenerator = new WorldGenerator(dimension);
+            var worldGenerator = new WorldGenerator(new NeighbourFinder(dimension), new PositionMapper(dimension));
             var actual = new string(worldGenerator.GenerateNewWorld(initialWorld).ToArray());
             
             Assert.Equal(expected, actual);
@@ -74,7 +74,7 @@ namespace ConwaysGameOfLifeTests
         [InlineData("XXXX....", 4, 5)]
         public void GivenNeighboursShouldReturnNumberOfLiveNeighbours(IEnumerable<char> neighbours, int expected, int dimension)
         {
-            var worldGenerator = new WorldGenerator(dimension);
+            var worldGenerator = new WorldGenerator(new NeighbourFinder(dimension), new PositionMapper(dimension));
             var actual = worldGenerator.GetCountOfLiveNeighbours(neighbours);
             
             Assert.Equal(expected, actual);

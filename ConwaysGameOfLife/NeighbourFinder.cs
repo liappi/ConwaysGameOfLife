@@ -5,7 +5,7 @@ namespace ConwaysGameOfLife
 {
     public class NeighbourFinder
     {
-        private PositionMapper _positionMapper;
+        private readonly PositionMapper _positionMapper;
 
         public NeighbourFinder(int dimension)
         {

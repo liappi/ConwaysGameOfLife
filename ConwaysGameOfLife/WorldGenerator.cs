@@ -5,16 +5,16 @@ namespace ConwaysGameOfLife
 {
     public class WorldGenerator
     {
-        private NeighbourFinder _neighbourFinder;
-        private PositionMapper _positionMapper;
+        private readonly NeighbourFinder _neighbourFinder;
+        private readonly PositionMapper _positionMapper;
         const char liveCell = 'X';
         const char deadCell = '.';
         
         
-        public WorldGenerator(int dimension)
+        public WorldGenerator(NeighbourFinder neighbourFinder, PositionMapper positionMapper)
         {
-            _neighbourFinder = new NeighbourFinder(dimension);
-            _positionMapper = new PositionMapper(dimension);
+            _neighbourFinder = neighbourFinder;
+            _positionMapper = positionMapper;
         }
         
         public IEnumerable<char> GenerateNewWorld(IEnumerable<char> world)

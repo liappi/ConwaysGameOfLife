@@ -23,7 +23,7 @@ namespace ConwaysGameOfLifeTests
                              "....." +
                              "....." +
                              "....." +
-                             ".....", 5)]
+                             ".....")]
         [InlineData("..X.." +
                     "....." +
                     "....." +
@@ -32,11 +32,11 @@ namespace ConwaysGameOfLifeTests
                              "....." +
                              "....." +
                              "....." +
-                             ".....", 5)]
+                             ".....")]
 
-        public void GivenWorldShouldUpdateGameWorld(IEnumerable<char> world, IEnumerable<char> expected, int dimension)
+        public void GivenWorldShouldUpdateGameWorld(IEnumerable<char> world, IEnumerable<char> expected)
         {
-            var game = new Game(dimension);
+            var game = new Game();
             game.UpdateWorld(expected);
             var actual = game.World;
             

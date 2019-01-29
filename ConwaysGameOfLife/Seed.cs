@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace ConwaysGameOfLife
 {
-    public class Seed
+    public static class Seed
     {
-        public static Dictionary<string, IEnumerable<char>> Seeds = new Dictionary<string, IEnumerable<char>>
+        public static readonly Dictionary<string, IEnumerable<char>> Seeds = new Dictionary<string, IEnumerable<char>>
         {
             {"BLINKER", ".........." +
                         ".........." +

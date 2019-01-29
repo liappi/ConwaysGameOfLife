@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using static ConwaysGameOfLife.Renderer;
 using static ConwaysGameOfLife.Seed;
 
 namespace ConwaysGameOfLife
@@ -8,12 +11,16 @@ namespace ConwaysGameOfLife
     {
         public IEnumerable<char> World;
         private WorldGenerator _worldGenerator;
-        private Renderer _renderer;
 
-        public Game(int dimension)
+        public void InitialiseGame(IEnumerable<char> seed)
         {
-            _worldGenerator = new WorldGenerator(dimension);
-            _renderer = new Renderer();
+            UpdateWorld(seed);
+
+            var dimension = (int) Math.Sqrt(seed.Count());
+            var positionMapper = new PositionMapper(dimension);
+            var neighbourFinder = new NeighbourFinder(dimension);
+            
+            _worldGenerator = new WorldGenerator(neighbourFinder, positionMapper);
         }
 
         public void UpdateWorld(IEnumerable<char> newWorld)
@@ -29,27 +36,27 @@ namespace ConwaysGameOfLife
 
         public void Play()
         {
-            _renderer.PrintWelcomeMessage();
+            PrintWelcomeMessage();
             var input = GetValidUserInput();
             var seed = Seeds[input];
-            UpdateWorld(seed);
+            InitialiseGame(seed);
 
             while (true)
             {
                 Tick();
                 Thread.Sleep(1000);
-                _renderer.PrintWorld(World);
+                PrintWorld(World);
             }
         }
 
-        public string GetValidUserInput()
+        private string GetValidUserInput()
         {
-            var input = _renderer.GetUserInput();
+            var input = GetUserInput();
             
             while (!Seeds.ContainsKey(input))
             {
-                _renderer.PrintInvalidInputMessage();
-                input = _renderer.GetUserInput();
+                PrintInvalidInputMessage();
+                input = GetUserInput();
             }
             
             return input;

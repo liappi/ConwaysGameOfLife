@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace ConwaysGameOfLife
+﻿namespace ConwaysGameOfLife
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var game = new Game(10);
+            var game = new Game();
             game.Play();
         }
     }
